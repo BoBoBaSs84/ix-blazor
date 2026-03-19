@@ -20,3 +20,13 @@ export const setApplicationConfig = (id, config) => {
     console.error("Failed to set application config:", error);
   }
 };
+
+export const setBreakpoints = (id, breakpoints) => {
+    const element = document.getElementById(id);
+
+    if (!element) {
+        throw new Error(`Element with ID ${id} not found`);
+    }
+
+    element.breakpoints = breakpoints;
+};
