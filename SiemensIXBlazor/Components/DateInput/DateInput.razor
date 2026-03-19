@@ -3,7 +3,7 @@
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
 
-<ix-date-input @attributes="UserAttributes"
+<ix-date-input @attributes="UserAttributes" 
                class = "@Class"
                style = "@Style"
                id = "@Id"
@@ -22,7 +22,14 @@
                warning-text = "@WarningText"
                valid-text = "@ValidText"
                invalid-text = "@InvalidText"
-               helper-text = "@HelperText">
+               helper-text = "@HelperText"
+               format = "@Format"
+               i18n-error-date-unparsable = "@I18nErrorDateUnparsable"
+               locale = "@Locale"
+               placeholder = "@PlaceHolder"
+               required = "@Required"
+               show-text-as-tooltip = "@ShowTextAsTooltip"
+               show-week-numbers="@ShowWeekNumbers">
 
     @if (StartSlot != null)
     {
