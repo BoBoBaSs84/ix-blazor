@@ -13,9 +13,21 @@
 @using SiemensIXBlazor.Enums.Button;
 @using SiemensIXBlazor.Helpers
 
-<ix-button @onclick="Clicked" @attributes="UserAttributes" style="@Style" class="@Class" id="@Id" disabled="@Disabled"
-    selected="@Selected" icon="@Icon" icon-right="@IconRight" aria-label-button="@AriaLabelButton"  loading="@Loading"
-    type="@(EnumParser<ButtonType>.EnumToString(Type))" variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
-    data-toggle="@DataToggle" data-tooltip="@DataTooltip" form="@Form">
+<ix-button @onclick="Clicked" 
+           @attributes="UserAttributes" 
+           style="@Style" 
+           class="@Class" 
+           id="@Id" 
+           disabled="@Disabled"
+           selected="@Selected" 
+           icon="@Icon" 
+           icon-right="@IconRight" 
+           aria-label-button="@AriaLabelButton" 
+           loading="@Loading"
+           type="@(EnumParser<ButtonType>.EnumToString(Type))"
+           variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))"
+           data-toggle="@DataToggle" 
+           data-tooltip="@DataTooltip" 
+           form="@Form">
     @ChildContent
 </ix-button>
