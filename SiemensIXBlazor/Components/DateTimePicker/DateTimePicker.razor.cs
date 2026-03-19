@@ -22,9 +22,9 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string DateFormat { get; set; } = "yyyy/MM/dd";
+        public string DateFormat { get; set; } = "yyyy/MM/dd";     
         [Parameter]
-        public string From { get; set; } = DateTime.Now.ToString("yyyy/MM/dd");
+        public string From { get; set; } 
         [Parameter]
         public string? MaxDate { get; set; }
         [Parameter]
@@ -72,9 +72,12 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void DateChange(string date)
+        public async void DateChange(JsonElement data)
         {
-            await DateChangeEvent.InvokeAsync(date);
+            string jsonDataText = data.GetRawText();
+            DatePickerResponse? jsonData = JObject.Parse(jsonDataText)
+                                                  .ToObject<DatePickerResponse>();
+            await DateChangeEvent.InvokeAsync(jsonData.From);
         }
 
         [JSInvokable]
