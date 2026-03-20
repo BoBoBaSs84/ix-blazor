@@ -46,6 +46,7 @@ public class DateTimePickerTest : TestContextBase
         bool isDateChangeEventTriggered = false;
         bool isDateSelectEventTriggered = false;
         bool isTimeChangeEventTriggered = false;
+        var dateChangeJson = JsonSerializer.SerializeToElement(new { From = "2022/12/31" });
 
         var cut = RenderComponent<DateTimePicker>(parameters => parameters
             .Add(p => p.DateChangeEvent, EventCallback.Factory.Create<string>(this, (date) => isDateChangeEventTriggered = true))
@@ -53,7 +54,7 @@ public class DateTimePickerTest : TestContextBase
             .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, (time) => isTimeChangeEventTriggered = true)));
 
         // Act
-        cut.Instance.DateChange("2022/12/31");
+        cut.Instance.DateChange(dateChangeJson);
         cut.Instance.TimeChange("12:00:00");
 
         var json = JsonSerializer.Serialize(new DateTimePickerResponse { Time = "2024/01/01" });
