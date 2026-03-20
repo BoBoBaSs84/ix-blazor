@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
 using System.Text.Json;
 
 namespace SiemensIXBlazor.Components.Input
 {
-    public partial class Input
+    public partial class Input 
     {
         private string _value = "";
         private BaseInterop? _interop;
@@ -13,8 +13,8 @@ namespace SiemensIXBlazor.Components.Input
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 
-        [Parameter]
-        public string? Placeholder {  get; set; } 
+        [Parameter] 
+        public string? Placeholder {  get; set; }
 
         [Parameter]
         public string Value
@@ -32,16 +32,16 @@ namespace SiemensIXBlazor.Components.Input
         [Parameter]
         public string Type { get; set; } = "text";
 
-        [Parameter]
+        [Parameter] 
         public string? Label { get; set; }
 
-        [Parameter]
+        [Parameter] 
         public string? HelperText { get; set; }
 
-        [Parameter]
+        [Parameter] 
         public string? InfoText { get; set; }
 
-        [Parameter]
+        [Parameter] 
         public string? WarningText { get; set; }
 
         [Parameter]
@@ -50,25 +50,40 @@ namespace SiemensIXBlazor.Components.Input
         [Parameter]
         public string? InvalidText { get; set; }
 
-        [Parameter]
+        [Parameter] 
         public string? AllowedCharactersPattern { get; set; }
 
-        [Parameter]
+        [Parameter] 
         public int? MaxLength { get; set; }
 
+        [Parameter] 
+        public int? MinLength { get; set; }
+
         [Parameter]
+        public bool Required { get; set; } = false;
+
+        [Parameter] 
+        public string? Name { get; set; }
+
+        [Parameter] 
+        public bool ShowTextAsTooltip { get; set; } = false;
+
+        [Parameter] 
+        public string? Pattern { get; set; }
+
+        [Parameter] 
         public RenderFragment? StartSlot { get; set; }
 
-        [Parameter]
+        [Parameter] 
         public RenderFragment? EndSlot { get; set; }
 
-        [Parameter]
+        [Parameter] 
         public EventCallback<string> ValueChangeEvent { get; set; }
 
         [Parameter]
         public EventCallback IxBlurEvent { get; set; }
 
-        [Parameter]
+        [Parameter] 
         public EventCallback<JsonElement> ValidityStateChangeEvent { get; set; }
 
         protected override void OnAfterRender(bool firstRender)

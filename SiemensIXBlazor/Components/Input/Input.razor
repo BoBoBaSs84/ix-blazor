@@ -1,4 +1,4 @@
-﻿@using Microsoft.JSInterop;
+@using Microsoft.JSInterop;
 @using SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
@@ -7,7 +7,7 @@
           class="@Class"
           style="@Style"
           id="@Id"
-          type="@Type"
+          type="@Type"   
           placeholder="@Placeholder"
           value="@Value"
           disabled="@Disabled"
@@ -19,8 +19,12 @@
           valid-text="@ValidText"
           invalid-text="@InvalidText"
           allowed-characters-pattern="@AllowedCharactersPattern"
-          max-length="@MaxLength">
-
+          max-length="@MaxLength"
+          min-length="@MinLength"
+          show-text-as-tooltip="@ShowTextAsTooltip"
+          pattern="@Pattern"
+          name="@Name"
+          required="@Required">
     @if (StartSlot != null)
     {
         <div slot="start">
