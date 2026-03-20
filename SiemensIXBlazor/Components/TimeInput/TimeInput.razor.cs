@@ -30,7 +30,7 @@ namespace SiemensIXBlazor.Components.TimeInput
         public bool EnableTopLayer { get; set; } = false;
 
         [Parameter]
-        public string Format { get; set; } = "TT";
+        public string Format { get; set; } = "HH:mm:ss";
 
         [Parameter]
         public string? HelperText { get; set; }
