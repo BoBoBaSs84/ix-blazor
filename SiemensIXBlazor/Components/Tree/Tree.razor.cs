@@ -12,19 +12,20 @@ using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects;
+using System.Dynamic;
 using System.Text.Json;
 
 namespace SiemensIXBlazor.Components.Tree
 {
-    public partial class Tree
+    public partial class Tree 
     {
         private Dictionary<string, TreeNode>? _treeModel;
         private Dictionary<string, TreeContextNode>? _treeContext;
         private Lazy<Task<IJSObjectReference>>? moduleTask;
-        private BaseInterop? _interop;
+        private BaseInterop _interop = default!;
 
         [Parameter, EditorRequired]
-        public string Id { get; set; } = string.Empty;
+        public string Id { get; set; } = string.Empty;       
         public Dictionary<string, TreeNode>? TreeModel 
         {
             get => _treeModel;
@@ -33,7 +34,7 @@ namespace SiemensIXBlazor.Components.Tree
                 _treeModel = value;
                 InitialParameter("setTreeModel", _treeModel);
             } 
-        }
+        }        
         public Dictionary<string, TreeContextNode>? TreeContext 
         {
             get => _treeContext;
@@ -42,31 +43,28 @@ namespace SiemensIXBlazor.Components.Tree
                 _treeContext = value;
                 InitialParameter("setTreeContext", _treeContext);
             }
-        }
+        }        
         [Parameter]
-        public string? Root { get; set; }
+        public string? Root { get; set; }        
         [Parameter]
-        public EventCallback<Dictionary<string, TreeContextNode>> ContextChangedEvent { get; set; }
+        public EventCallback<Dictionary<string, TreeContextNode>> ContextChangedEvent { get; set; }        
         [Parameter]
-        public EventCallback NodeRemovedEvent { get; set; }
+        public EventCallback NodeRemovedEvent { get; set; }        
         [Parameter]
-        public EventCallback<string> NodeClickedEvent { get; set; }
+        public EventCallback<string> NodeClickedEvent { get; set; }        
         [Parameter]
         public EventCallback<TreeNodeToggledEventResult> NodeToggledEvent { get; set; }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
                 _interop = new(JSRuntime);
 
-                Task.Run(async () =>
-                {
-                    await _interop.AddEventListener(this, Id, "contextChange", "ContextChanged");
-                    await _interop.AddEventListener(this, Id, "nodeRemoved", "NodeRemoved");
-                    await _interop.AddEventListener(this, Id, "nodeClicked", "NodeClicked");
-                    await _interop.AddEventListener(this, Id, "nodeToggled", "NodeToggled");
-                });
+                await _interop.AddEventListener(this, Id, "contextChange", "ContextChanged");
+                await _interop.AddEventListener(this, Id, "nodeRemoved", "NodeRemoved");
+                await _interop.AddEventListener(this, Id, "nodeClicked", "NodeClicked");
+                await _interop.AddEventListener(this, Id, "nodeToggled", "NodeToggled");
             }
         }
 
@@ -129,6 +127,5 @@ namespace SiemensIXBlazor.Components.Tree
                 await module.InvokeVoidAsync("markItemAsDirty", Id, itemIdentifiers);
             }
         }
-
     }
 }
