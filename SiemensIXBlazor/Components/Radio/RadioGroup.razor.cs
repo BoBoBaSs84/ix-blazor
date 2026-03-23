@@ -27,6 +27,9 @@ namespace SiemensIXBlazor.Components.Radio
         public string? CssClass { get; set; }
 
         [Parameter]
+        public string? Direction { get; set; }
+
+        [Parameter]
         public RenderFragment? ChildContent { get; set; }
     }
 }
