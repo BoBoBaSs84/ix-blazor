@@ -1066,43 +1066,33 @@ private void DrawerButtonClicked()
 ## Modal
 
 ```razor
-<div class="@modalClass" style="display:@modalDisplay">
-    <div class="modal-header">
-        Message headline
-        <IconButton
-            Icon="close"
-            Class="dismiss-modal"
-            ClickEvent="() => CloseModal()"
-        ></IconButton>
-    </div>
-    <div class="modal-body">Message text lorem ipsum</div>
-    <div class="modal-footer">
-        <Button Class="dismiss-modal"
-                ClickEvent="() => CloseModal()">
-             Cancel
-        </Button>
-        <Button ClickEvent="() => CloseModal()"
-                Class="close-modal">
-             OK
-        </Button>
-    </div>
-</div>
+<Modal @ref="_modal" Id="modal-example-template"
+    Centered="true" 
+    DismissedEvent="OnModalDismissed">
+   <ModalHeader Id="modal-header">Message headline</ModalHeader> 
+   <ModalContent Id="modal-content">Message text </ModalContent>
+   <ModalFooter Id="modal-footer">
+   <Button Variant="ButtonVariant.primary" ClickEvent="CloseModal"> Cancel </Button> 
+   <Button ClickEvent="CloseModal">OK</Button> 
+   </ModalFooter>
+</Modal>
 ```
 
 ```csharp
-string modalClass = "";
-string modalDisplay = "none;";
-
-private void OpenModal()
-{
-    modalDisplay = "block;";
-    modalClass = "show";
+private Modal? _modal;
+private async Task OpenModal() 
+{ 
+  if (_modal is not null)
+    await _modal.ShowAsync(); 
 }
-
-private void CloseModal()
+private async Task CloseModal()
 {
-    modalDisplay = "none;";
-    modalClass = "";
+  if (_modal is not null) 
+    await _modal.HideAsync(); 
+}
+private void OnModalDismissed() 
+{
+  Console.WriteLine("Modal was dismissed."); 
 }
 ```
 
@@ -1213,32 +1203,36 @@ AddItemEvent="SelectItemAdded" Mode="SelectMode.Single" SelectedIndices="2" Id="
 ## Tabs
 
 ```razor
-<div class="example">
-    <Tabs Id="tabs-demo">
-        <ix-tab-item data-tab-id="0">Tab 1</ix-tab-item>
-        <ix-tab-item data-tab-id="1">Tab 2</ix-tab-item>
-        <ix-tab-item data-tab-id="2">Tab 3</ix-tab-item>
-    </Tabs>
-    <div data-tab-content="0" class="show">Content Tab 1</div>
-    <div data-tab-content="1">Content Tab 2</div>
-    <div data-tab-content="2">Content Tab 3</div>
-</div>
+<Tabs Id="TabsId"  Selected=@_SelectedTab   SelectedChangeEvent=@OnChangeTab >
+    <TabItem Id="Tab1" Selected="@(_SelectedTab == 0)" TabTitle="Tab 1" >Tab 1
+    </TabItem>
+    <TabItem Id="Tab2" Selected="@(_SelectedTab == 1)" TabTitle="Tab 2"> Tab 2
+    </TabItem>
+    <TabItem Id="Tab3" Selected="@(_SelectedTab == 2)" TabTitle="Tab 3"> Tab 3
+    </TabItem>
+</Tabs>
+@if (_SelectedTab == 0)
+{
+  <h5>Content of Tab 1</h5>   
+}
+else if (_SelectedTab == 1)
+{
+  <h5>Content of Tab 2</h5>
+}
+else if (_SelectedTab == 2)
+{
+  <h5>Content of Tab 3</h5>
+}
 ```
 
-```css
-.example {
-  display: block;
-  position: relative;
-  width: 100%;
+```csharp
+ private int _SelectedTab = 0;
+
+private async Task OnChangeTab(int index)
+{
+    _SelectedTab = index;
 }
 
-div[data-tab-content] {
-  display: none;
-}
-
-div[data-tab-content].show {
-  display: block;
-}
 ```
 
 ## Text area
