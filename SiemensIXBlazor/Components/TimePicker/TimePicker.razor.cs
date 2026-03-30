@@ -21,7 +21,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public DatePickerCorners Corners { get; set; } = DatePickerCorners.Rounded;
         [Parameter]
-        public string Format { get; set; } = "TT";
+        public string Format { get; set; } = "HH:mm:ss";
         [Parameter]
         public bool HideHeader { get; set; } = false;
         [Parameter]

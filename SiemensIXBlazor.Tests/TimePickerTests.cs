@@ -29,7 +29,7 @@ namespace SiemensIXBlazor.Tests
             // Assert required attributes
             Assert.Equal("tp-default", picker.GetAttribute("id"));
             Assert.Equal("rounded", picker.GetAttribute("corners"));
-            Assert.Equal("TT", picker.GetAttribute("format"));
+            Assert.Equal("HH:mm:ss", picker.GetAttribute("format"));
             Assert.False(string.IsNullOrWhiteSpace(picker.GetAttribute("time")));
         }
 
