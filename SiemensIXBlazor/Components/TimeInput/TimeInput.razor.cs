@@ -7,18 +7,40 @@ namespace SiemensIXBlazor.Components.TimeInput
 {
     public partial class TimeInput
     {
-        private int _hourInterval = 1;
-        private string _i18nErrorDateUnparsable = "Time is not valid";
-        private string _i18nHourColumnHeader = "hr";
-        private string _i18nMillisecondColumnHeader = "ms";
-        private string _i18nMinuteColumnHeader = "min";
-        private string _i18nSecondColumnHeader = "sec";
-        private string _i18nSelectTime = "Confirm";
-        private string _i18nTime = "Time";
-        private int _millisecondInterval = 100;
-        private int _minuteInterval = 1;
-        private int _secondInterval = 1;
         private BaseInterop? _interop;
+
+        [Parameter]
+        public int HourInterval { get; set; } = 1;
+
+        [Parameter]
+        public string I18nErrorTimeUnparsable { get; set; } = "Time is not valid";
+
+        [Parameter]
+        public string I18nHourColumnHeader { get; set; } = "hr";
+
+        [Parameter]
+        public string I18nMillisecondColumnHeader { get; set; } = "ms";
+
+        [Parameter]
+        public string I18nMinuteColumnHeader { get; set; } = "min";
+
+        [Parameter]
+        public string I18nSecondColumnHeader { get; set; } = "sec";
+
+        [Parameter]
+        public string I18nSelectTime { get; set; } = "Confirm";
+
+        [Parameter]
+        public string I18nTime { get; set; } = "Time";
+
+        [Parameter]
+        public int MillisecondInterval { get; set; } = 100;
+
+        [Parameter]
+        public int MinuteInterval { get; set; } = 1;
+
+        [Parameter]
+        public int SecondInterval { get; set; } = 1;
 
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
@@ -30,7 +52,7 @@ namespace SiemensIXBlazor.Components.TimeInput
         public bool EnableTopLayer { get; set; } = false;
 
         [Parameter]
-        public string Format { get; set; } = "HH:mm:ss";
+        public string Format { get; set; } = "TT";
 
         [Parameter]
         public string? HelperText { get; set; }
@@ -48,7 +70,7 @@ namespace SiemensIXBlazor.Components.TimeInput
         public string? Name { get; set; }
 
         [Parameter]
-        public string? PlaceHolder { get; set; }
+        public string? Placeholder { get; set; }
 
         [Parameter]
         public bool Readonly { get; set; } = false;

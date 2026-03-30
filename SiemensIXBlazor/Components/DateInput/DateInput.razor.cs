@@ -55,7 +55,7 @@ namespace SiemensIXBlazor.Components.DateInput
         public string? Name { get; set; }
 
         [Parameter]
-        public string? PlaceHolder { get; set; }
+        public string? Placeholder { get; set; }
 
         [Parameter]
         public bool Readonly { get; set; } = false;
