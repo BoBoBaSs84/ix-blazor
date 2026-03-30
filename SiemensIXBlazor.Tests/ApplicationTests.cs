@@ -21,14 +21,13 @@ namespace SiemensIXBlazor.Tests
             // Arrange
             var cut = RenderComponent<Application>(parameters => {
                 parameters.Add(p => p.Id, "testId");
-                parameters.Add(p => p.Breakpoints, ["sm", "md", "lg"]);
                 parameters.Add(p => p.ForceBreakpoint, Enums.ForceBreakpoint.lg);
                 parameters.Add(p => p.Theme, "testTheme");
                 parameters.Add(p => p.ThemeSystemAppearance, true);
             });
 
             // Assert
-            cut.MarkupMatches("<ix-application id='testId' breakpoints=\"['sm','md','lg']\" force-breakpoint='lg' theme='testTheme' theme-system-appearance=''></ix-application>");
+            cut.MarkupMatches("<ix-application id='testId' force-breakpoint='lg' theme='testTheme' theme-system-appearance=''></ix-application>");
         }
 
         [Fact]

@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -9,11 +9,9 @@
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Newtonsoft.Json.Linq;
 using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects;
 using System.Text.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SiemensIXBlazor.Components
 {
@@ -22,9 +20,9 @@ namespace SiemensIXBlazor.Components
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
         [Parameter]
-        public string DateFormat { get; set; } = "yyyy/MM/dd";
+        public string DateFormat { get; set; } = "yyyy/MM/dd";     
         [Parameter]
-        public string From { get; set; } = DateTime.Now.ToString("yyyy/MM/dd");
+        public string From { get; set; } 
         [Parameter]
         public string? MaxDate { get; set; }
         [Parameter]
@@ -72,23 +70,24 @@ namespace SiemensIXBlazor.Components
         }
 
         [JSInvokable]
-        public async void DateChange(string date)
+        public async Task DateChange(JsonElement data)
         {
-            await DateChangeEvent.InvokeAsync(date);
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            DatePickerResponse? jsonData = data.Deserialize<DatePickerResponse>(options);
+            await DateChangeEvent.InvokeAsync(jsonData?.From);
         }
 
         [JSInvokable]
-        public async void TimeChange(string date)
+        public async Task TimeChange(string date)
         {
             await TimeChangeEvent.InvokeAsync(date);
         }
 
         [JSInvokable]
-        public async void DateSelect(JsonElement data)
+        public async Task DateSelect(JsonElement data)
         {
-            string jsonDataText = data.GetRawText();
-            DateTimePickerResponse? jsonData = JObject.Parse(jsonDataText)
-                                                  .ToObject<DateTimePickerResponse>();
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            DateTimePickerResponse? jsonData = data.Deserialize<DateTimePickerResponse>(options);
             await DateSelectEvent.InvokeAsync(jsonData);
         }
 

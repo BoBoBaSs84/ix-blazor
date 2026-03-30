@@ -30,6 +30,6 @@
 				 style="@Style"
 				 class="@Class"
 				 close-behavior="@(EnumParser<CloseBehavior>.EnumToString(CloseBehavior))"
-				 variant="@(EnumParser<ButtonVariant>.EnumToString(Variant))">
+				 variant="@(EnumParser<ButtonVariant>.EnumToString(Variant, replaceUnderscores: true))">
 	@ChildContent
 </ix-split-button>

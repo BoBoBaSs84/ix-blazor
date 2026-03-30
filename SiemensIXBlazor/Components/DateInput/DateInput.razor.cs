@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
 using System.Text.Json;
 
 namespace SiemensIXBlazor.Components.DateInput
 {
-    public partial class DateInput
+    public partial class DateInput 
     {
-        private string _i18nErrorDateUnparsable = "Date is not valid";
         private BaseInterop? _interop;
 
         [Parameter, EditorRequired]
@@ -56,16 +55,16 @@ namespace SiemensIXBlazor.Components.DateInput
         public string? Name { get; set; }
 
         [Parameter]
-        public string? PlaceHolder { get; set; }
+        public string? Placeholder { get; set; }
 
         [Parameter]
-        public bool Readonly { get; set; }= false;
+        public bool Readonly { get; set; } = false;
 
         [Parameter]
-        public bool? Required { get; set; }
+        public bool Required { get; set; } = false;
 
         [Parameter]
-        public bool? ShowTextAsTooltip { get; set; }
+        public bool ShowTextAsTooltip { get; set; } = false;
 
         [Parameter]
         public bool ShowWeekNumbers { get; set; } = false;
@@ -81,6 +80,9 @@ namespace SiemensIXBlazor.Components.DateInput
 
         [Parameter]
         public int WeekStartIndex { get; set; } = 0;
+
+        [Parameter]
+        public string I18nErrorDateUnparsable { get; set; } = "Date is not valid";
 
         [Parameter]
         public RenderFragment? StartSlot { get; set; }

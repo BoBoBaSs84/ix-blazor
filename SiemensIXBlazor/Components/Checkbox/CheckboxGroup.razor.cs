@@ -1,9 +1,8 @@
-﻿using SiemensIXBlazor.Components;
 using Microsoft.AspNetCore.Components;
 
 namespace SiemensIXBlazor.Components.Checkbox
 {
-    public partial class CheckboxGroup
+    public partial class CheckboxGroup 
     {
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
@@ -22,6 +21,15 @@ namespace SiemensIXBlazor.Components.Checkbox
 
         [Parameter]
         public string? ValidText { get; set; }
+
+        [Parameter]
+        public string? HelperText { get; set; }
+
+        [Parameter]
+        public string Direction { get; set; } = "column";
+
+        [Parameter]
+        public bool ShowTextAsTooltip { get; set; } = false;
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }

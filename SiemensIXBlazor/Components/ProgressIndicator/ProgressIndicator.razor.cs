@@ -8,16 +8,18 @@
 //  -----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json.Linq;
 using SiemensIXBlazor.Enums.ProgressIndicator;
 
 namespace SiemensIXBlazor.Components
 {
     public partial class ProgressIndicator
     {
-        /// <summary>
-        /// The id attribute for the progress indicator.
-        /// </summary>
-        [Parameter]
+    private double _value = 0;
+    /// <summary>
+    /// The id attribute for the progress indicator.
+    /// </summary>
+    [Parameter]
         public string? Id { get; set; }
 
         /// <summary>
@@ -74,10 +76,19 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public ProgressIndicatorType Type { get; set; } = ProgressIndicatorType.linear;
 
-        /// <summary>
-        /// The value of the progress indicator.
-        /// </summary>
-        [Parameter]
-        public double Value { get; set; } = 0;
+         /// <summary>
+    /// The value of the progress indicator.
+    /// </summary>
+    [Parameter]
+    public double Value
+    {
+      get => _value;
+      set => _value = Math.Clamp(value, Min, Max);
     }
+
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+  }
 }
