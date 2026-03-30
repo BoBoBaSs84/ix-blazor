@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -21,7 +21,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public DatePickerCorners Corners { get; set; } = DatePickerCorners.Rounded;
         [Parameter]
-        public string Format { get; set; } = "HH:mm:ss";
+        public string Format { get; set; } = "TT";
         [Parameter]
         public bool HideHeader { get; set; } = false;
         [Parameter]
