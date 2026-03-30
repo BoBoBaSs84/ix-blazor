@@ -1,4 +1,4 @@
-@using Microsoft.JSInterop;
+﻿@using Microsoft.JSInterop;
 @using SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
@@ -19,8 +19,19 @@
                helper-text ="@HelperText"
                value="@Value"
                format="@Format"
-               show-text-as-tooltip="@(ShowTextAsTooltip == true ? "" : null)"       
-               placeholder="@Placeholder" >
+               show-text-as-tooltip="@(ShowTextAsTooltip == true ? "" : null)"
+               placeholder="@Placeholder"
+               hour-interval="@HourInterval"
+               millisecond-interval="@MillisecondInterval"
+               minute-interval="@MinuteInterval"
+               second-interval="@SecondInterval"
+               i18n-error-time-unparsable="@I18nErrorTimeUnparsable"
+               i18n-hour-column-header="@I18nHourColumnHeader"
+               i18n-millisecond-column-header="@I18nMillisecondColumnHeader"
+               i18n-minute-column-header="@I18nMinuteColumnHeader"
+               i18n-second-column-header="@I18nSecondColumnHeader"
+               i18n-select-time="@I18nSelectTime"
+               i18n-time="@I18nTime" >
 
     @if (StartSlot != null)
     {
