@@ -20,7 +20,7 @@ namespace SiemensIXBlazor.Components
         [Parameter]
         public string? Anchor { get; set; }
         [Parameter]
-        public dynamic CloseBehavior { get; set; } = "both";
+        public string CloseBehavior { get; set; } = "both";
         [Parameter]
         public string? Header { get; set; }
         [Parameter]

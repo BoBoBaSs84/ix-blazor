@@ -1,4 +1,4 @@
-﻿@using Microsoft.JSInterop;
+@using Microsoft.JSInterop;
 @using SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
@@ -13,7 +13,10 @@
                        info-text="@InfoText"
                        warning-text="@WarningText"
                        invalid-text="@InvalidText"
-                       valid-text="@ValidText">
+                       valid-text="@ValidText"
+                       helper-text="@HelperText"
+                       direction="@Direction"
+                       show-text-as-tooltip="@ShowTextAsTooltip">
         @ChildContent
     </ix-checkbox-group>
 </CascadingValue>

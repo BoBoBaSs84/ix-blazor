@@ -17,7 +17,7 @@ using SiemensIXBlazor.Enums;
 using SiemensIXBlazor.Interops;
 using SiemensIXBlazor.Objects.Application;
 
-public partial class Application
+public partial class Application 
 {
     private Lazy<Task<IJSObjectReference>>? moduleTask;
     private BaseInterop? _interop;
@@ -42,6 +42,21 @@ public partial class Application
         {
             _appSwitchConfig = value;
             InitialParameter("setApplicationConfig", _appSwitchConfig);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            moduleTask ??= new(() => JSRuntime.InvokeAsync<IJSObjectReference>(
+                "import", $"./_content/Siemens.IX.Blazor/js/siemens-ix/interops/applicationInterop.js").AsTask());
+
+            var module = await moduleTask.Value;
+            if (module != null)
+            {
+                await module.InvokeVoidAsync("setBreakpoints", Id, Breakpoints);
+            }
         }
     }
 

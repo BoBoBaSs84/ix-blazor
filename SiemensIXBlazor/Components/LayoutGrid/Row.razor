@@ -8,6 +8,10 @@
 //  -----------------------------------------------------------------------
 *@
 
-<ix-row>
+@inherits IXBaseComponent
+
+<ix-row @attributes="UserAttributes"
+                class="@Class"
+                style="@Style">
     @ChildContent
 </ix-row>

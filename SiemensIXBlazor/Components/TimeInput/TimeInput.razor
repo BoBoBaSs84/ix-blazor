@@ -16,7 +16,11 @@
                warning-text="@WarningText"
                valid-text="@ValidText"
                invalid-text="@InvalidText"
-               helper-text ="@HelperText">
+               helper-text ="@HelperText"
+               value="@Value"
+               format="@Format"
+               show-text-as-tooltip="@(ShowTextAsTooltip == true ? "" : null)"       
+               placeholder="@PlaceHolder" >
 
     @if (StartSlot != null)
     {

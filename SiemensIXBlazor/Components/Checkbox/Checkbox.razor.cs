@@ -91,9 +91,9 @@ namespace SiemensIXBlazor.Components.Checkbox
 
                 Task.Run(async () =>
                 {
-                    await _interop.AddEventListener(this, Id, "checkedChanged", "CheckedChanged");
+                    await _interop.AddEventListener(this, Id, "checkedChange", "CheckedChanged");
                     await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur");
-                    await _interop.AddEventListener(this, Id, "valueChanged", "ValueChanged");
+                    await _interop.AddEventListener(this, Id, "valueChange", "ValueChanged");
                 });
             }
         }
