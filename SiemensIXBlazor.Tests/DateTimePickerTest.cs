@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // SPDX-FileCopyrightText: 2024 Siemens AG
 //
 // SPDX-License-Identifier: MIT
@@ -40,7 +40,7 @@ public class DateTimePickerTest : TestContextBase
     }
 
     [Fact]
-    public void EventCallbacksAreTriggeredCorrectly()
+    public async Task EventCallbacksAreTriggeredCorrectly()
     {
         // Arrange
         bool isDateChangeEventTriggered = false;
@@ -54,12 +54,12 @@ public class DateTimePickerTest : TestContextBase
             .Add(p => p.TimeChangeEvent, EventCallback.Factory.Create<string>(this, (time) => isTimeChangeEventTriggered = true)));
 
         // Act
-        cut.Instance.DateChange(dateChangeJson);
-        cut.Instance.TimeChange("12:00:00");
+        await cut.Instance.DateChange(dateChangeJson);
+        await cut.Instance.TimeChange("12:00:00");
 
         var json = JsonSerializer.Serialize(new DateTimePickerResponse { Time = "2024/01/01" });
         var parsedJson = JsonDocument.Parse(json).RootElement;
-        cut.Instance.DateSelect(parsedJson);
+        await cut.Instance.DateSelect(parsedJson);
 
 
         // Assert

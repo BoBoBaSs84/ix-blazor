@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using SiemensIXBlazor.Interops;
 using System.Text.Json;
@@ -30,7 +30,7 @@ namespace SiemensIXBlazor.Components.TimeInput
         public bool EnableTopLayer { get; set; } = false;
 
         [Parameter]
-        public string Format { get; set; } = "HH:mm:ss";
+        public string Format { get; set; } = "TT";
 
         [Parameter]
         public string? HelperText { get; set; }
@@ -48,7 +48,7 @@ namespace SiemensIXBlazor.Components.TimeInput
         public string? Name { get; set; }
 
         [Parameter]
-        public string? PlaceHolder { get; set; }
+        public string? Placeholder { get; set; }
 
         [Parameter]
         public bool Readonly { get; set; } = false;

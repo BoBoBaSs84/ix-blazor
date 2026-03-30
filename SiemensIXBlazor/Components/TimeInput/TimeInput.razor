@@ -1,4 +1,4 @@
-﻿@using Microsoft.JSInterop;
+@using Microsoft.JSInterop;
 @using SiemensIXBlazor.Components
 @inherits IXBaseComponent
 @inject IJSRuntime JSRuntime
@@ -20,7 +20,7 @@
                value="@Value"
                format="@Format"
                show-text-as-tooltip="@(ShowTextAsTooltip == true ? "" : null)"       
-               placeholder="@PlaceHolder" >
+               placeholder="@Placeholder" >
 
     @if (StartSlot != null)
     {
