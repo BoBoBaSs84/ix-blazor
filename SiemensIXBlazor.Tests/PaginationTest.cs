@@ -66,5 +66,33 @@ namespace SiemensIXBlazor.Tests
             // Assert
             Assert.Equal(2, selectedPage);
         }
+
+        [Fact]
+        public void ItemCountOptionsIsNullByDefault()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<Components.Pagination.Pagination>(parameters =>
+                parameters.Add(p => p.Id, "testId")
+            );
+
+            // Assert
+            Assert.Null(cut.Instance.ItemCountOptions);
+            Assert.DoesNotContain("item-count-options", cut.Markup);
+        }
+
+        [Fact]
+        public void ItemCountOptionsRendersAsCommaSeparatedString()
+        {
+            // Arrange & Act
+            var cut = RenderComponent<Components.Pagination.Pagination>(parameters =>
+            {
+                parameters.Add(p => p.Id, "testId");
+                parameters.Add(p => p.ItemCountOptions, new[] { 15, 25, 50 });
+            });
+
+            // Assert
+            var element = cut.Find("ix-pagination");
+            Assert.Equal("15,25,50", element.GetAttribute("item-count-options"));
+        }
     }
 }

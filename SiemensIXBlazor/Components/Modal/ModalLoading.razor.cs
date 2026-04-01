@@ -28,5 +28,11 @@ namespace SiemensIXBlazor.Components.Modal
         /// </summary>
         [Parameter]
         public string Text { get; set; } = "Loading...";
+
+        /// <summary>
+        /// Center the loading indicator inside the modal. Default: false
+        /// </summary>
+        [Parameter]
+        public bool Centered { get; set; } = false;
     }
 }

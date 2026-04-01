@@ -7,6 +7,7 @@
 // LICENSE file in the root directory of this source tree.
 //  -----------------------------------------------------------------------
 
+using System.Globalization;
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
@@ -18,6 +19,8 @@ public class TestContextBase : TestContext
 {
     public TestContextBase()
     {
+        CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+        CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
         Mock<IJSRuntime> jsRuntimeMock = new();
         Mock<IJSObjectReference> jsObjectReferenceMock = new();
 

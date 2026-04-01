@@ -94,6 +94,9 @@ namespace SiemensIXBlazor.Components.DateInput
         public EventCallback<string> ValueChangeEvent { get; set; }
 
         [Parameter]
+        public EventCallback<string> ChangeEvent { get; set; }
+
+        [Parameter]
         public EventCallback<JsonElement> ValidityStateChangeEvent { get; set; }
 
         protected override void OnAfterRender(bool firstRender)
@@ -105,6 +108,7 @@ namespace SiemensIXBlazor.Components.DateInput
                 Task.Run(async () =>
                 {
                     await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
+                    await _interop.AddEventListener(this, Id, "change", "Change");
                     await _interop.AddEventListener(this, Id, "validityStateChange", "ValidityStateChange");
                 });
             }
@@ -117,6 +121,12 @@ namespace SiemensIXBlazor.Components.DateInput
             Value = newValue;
             await ValueChangeEvent.InvokeAsync(newValue);
             StateHasChanged();
+        }
+
+        [JSInvokable]
+        public async void Change(JsonElement valueState)
+        {
+            await ChangeEvent.InvokeAsync(valueState.GetString() ?? "");
         }
 
         [JSInvokable]
