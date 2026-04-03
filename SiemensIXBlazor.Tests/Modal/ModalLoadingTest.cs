@@ -117,5 +117,32 @@ namespace SiemensIXBlazor.Tests.Modal
             var element = component.Find("ix-modal-loading");
             Assert.Equal(longText, element.GetAttribute("text"));
         }
+
+        [Fact]
+        public void ModalLoading_CenteredDefaultsToFalse()
+        {
+            // Arrange & Act
+            var component = RenderComponent<ModalLoading>(parameters => parameters
+                .Add(p => p.Id, "test-modal-loading")
+            );
+
+            // Assert
+            Assert.False(component.Instance.Centered);
+            Assert.DoesNotContain("centered", component.Markup);
+        }
+
+        [Fact]
+        public void ModalLoading_ShouldRenderCenteredWhenTrue()
+        {
+            // Arrange & Act
+            var component = RenderComponent<ModalLoading>(parameters => parameters
+                .Add(p => p.Id, "test-modal-loading")
+                .Add(p => p.Centered, true)
+            );
+
+            // Assert
+            Assert.True(component.Instance.Centered);
+            Assert.Contains("centered", component.Markup);
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace SiemensIXBlazor.Components.Input
 {
-    public partial class Input 
+    public partial class Input
     {
         private string _value = "";
         private BaseInterop? _interop;
@@ -13,7 +13,7 @@ namespace SiemensIXBlazor.Components.Input
         [Parameter, EditorRequired]
         public string Id { get; set; } = string.Empty;
 
-        [Parameter] 
+        [Parameter]
         public string? Placeholder {  get; set; }
 
         [Parameter]
@@ -32,16 +32,16 @@ namespace SiemensIXBlazor.Components.Input
         [Parameter]
         public string Type { get; set; } = "text";
 
-        [Parameter] 
+        [Parameter]
         public string? Label { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public string? HelperText { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public string? InfoText { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public string? WarningText { get; set; }
 
         [Parameter]
@@ -50,40 +50,43 @@ namespace SiemensIXBlazor.Components.Input
         [Parameter]
         public string? InvalidText { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public string? AllowedCharactersPattern { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public int? MaxLength { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public int? MinLength { get; set; }
 
         [Parameter]
         public bool Required { get; set; } = false;
 
-        [Parameter] 
+        [Parameter]
         public string? Name { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public bool ShowTextAsTooltip { get; set; } = false;
 
-        [Parameter] 
+        [Parameter]
         public string? Pattern { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public RenderFragment? StartSlot { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public RenderFragment? EndSlot { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public EventCallback<string> ValueChangeEvent { get; set; }
+
+        [Parameter]
+        public EventCallback<string> ChangeEvent { get; set; }
 
         [Parameter]
         public EventCallback IxBlurEvent { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public EventCallback<JsonElement> ValidityStateChangeEvent { get; set; }
 
         protected override void OnAfterRender(bool firstRender)
@@ -95,6 +98,7 @@ namespace SiemensIXBlazor.Components.Input
                 Task.Run(async () =>
                 {
                     await _interop.AddEventListener(this, Id, "valueChange", "ValueChange");
+                    await _interop.AddEventListener(this, Id, "change", "Change");
                     await _interop.AddEventListener(this, Id, "ixBlur", "IxBlur");
                     await _interop.AddEventListener(this, Id, "validityStateChange", "ValidityStateChange");
                 });
@@ -108,6 +112,12 @@ namespace SiemensIXBlazor.Components.Input
             _value = newValue;
             await ValueChangeEvent.InvokeAsync(newValue);
             StateHasChanged();
+        }
+
+        [JSInvokable]
+        public async void Change(JsonElement valueState)
+        {
+            await ChangeEvent.InvokeAsync(valueState.GetString() ?? "");
         }
 
         [JSInvokable]

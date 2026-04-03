@@ -10,35 +10,23 @@
 using System.Text.Json;
 using Bunit;
 using Microsoft.AspNetCore.Components;
-using SiemensIXBlazor.Components.TimeInput;
+using SiemensIXBlazor.Components.Input;
+using Xunit;
 
 namespace SiemensIXBlazor.Tests;
 
-public class TimeInputTest : TestContextBase
+public class InputTest : TestContextBase
 {
     [Fact]
-    public void EnableTopLayerDefaultsToFalse()
+    public void InputRendersWithId()
     {
-        // Arrange
-        var cut = RenderComponent<TimeInput>(parameters => parameters
-            .Add(p => p.Id, "test-id"));
+        // Arrange & Act
+        var cut = RenderComponent<Input>(parameters => parameters
+            .Add(p => p.Id, "test-input"));
 
         // Assert
-        Assert.False(cut.Instance.EnableTopLayer);
-        Assert.DoesNotContain("enable-top-layer", cut.Markup);
-    }
-
-    [Fact]
-    public void EnableTopLayerTrueRendersAttribute()
-    {
-        // Arrange
-        var cut = RenderComponent<TimeInput>(parameters => parameters
-            .Add(p => p.Id, "test-id")
-            .Add(p => p.EnableTopLayer, true));
-
-        // Assert
-        Assert.True(cut.Instance.EnableTopLayer);
-        Assert.Contains("enable-top-layer", cut.Markup);
+        var element = cut.Find("ix-input");
+        Assert.Equal("test-input", element.GetAttribute("id"));
     }
 
     [Fact]
@@ -46,15 +34,15 @@ public class TimeInputTest : TestContextBase
     {
         // Arrange
         var received = string.Empty;
-        var cut = RenderComponent<TimeInput>(parameters => parameters
-            .Add(p => p.Id, "test-id")
+        var cut = RenderComponent<Input>(parameters => parameters
+            .Add(p => p.Id, "test-input")
             .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
 
         // Act
-        cut.Instance.Change(JsonDocument.Parse("\"14:30:00\"").RootElement);
+        cut.Instance.Change(JsonDocument.Parse("\"hello\"").RootElement);
 
         // Assert
-        Assert.Equal("14:30:00", received);
+        Assert.Equal("hello", received);
     }
 
     [Fact]
@@ -62,8 +50,8 @@ public class TimeInputTest : TestContextBase
     {
         // Arrange
         var received = "initial";
-        var cut = RenderComponent<TimeInput>(parameters => parameters
-            .Add(p => p.Id, "test-id")
+        var cut = RenderComponent<Input>(parameters => parameters
+            .Add(p => p.Id, "test-input")
             .Add(p => p.ChangeEvent, EventCallback.Factory.Create<string>(this, (string val) => received = val)));
 
         // Act

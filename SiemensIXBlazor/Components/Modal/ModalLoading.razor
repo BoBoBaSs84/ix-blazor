@@ -12,15 +12,12 @@ LICENSE file in the root directory of this source tree.
 @using Microsoft.AspNetCore.Components
 @inherits IXBaseComponent
 
-<ix-modal-loading 
+<ix-modal-loading
     id="@Id"
     text="@Text"
+    centered="@Centered"
     class="@Class"
     style="@Style"
     @attributes="@UserAttributes">
     @ChildContent
 </ix-modal-loading>
-
-@code {
-    
-}

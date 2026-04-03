@@ -22,7 +22,7 @@ namespace SiemensIXBlazor.Components.Pagination
         [Parameter]
         public string? AriaLabelChevronLeftIconButton { get; set; }
         [Parameter]
-        public string? AriaLabelChevronRightIconButton { get; set; }    
+        public string? AriaLabelChevronRightIconButton { get; set; }
         [Parameter]
         public string? AriaLabelPageSelection { get; set; } = "Page selection input";
         [Parameter]
@@ -39,6 +39,8 @@ namespace SiemensIXBlazor.Components.Pagination
         public int SelectedPage { get; set; } = 0;
         [Parameter]
         public bool HideItemCount { get; set; } = false;
+        [Parameter]
+        public int[]? ItemCountOptions { get; set; }
         [Parameter]
         public EventCallback<int> ItemCountChangedEvent { get; set; }
         [Parameter]
